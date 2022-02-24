@@ -10,13 +10,13 @@ defmodule Servy.Controllers.BearController do
       |> Enum.sort(&Bear.compare_name/2)
 
     content = render("index.eex", bears: bears)
-    %Conv{conv | res_body: content}
+    %Conv{conv | res_body: content, status: 200}
   end
 
   def show(conv, %{"id" => id}) do
     bear = Wildthings.get_bear(id)
     content = render("show.eex", bear: bear)
-    %Conv{conv | res_body: content}
+    %Conv{conv | res_body: content, status: 200}
   end
 
   def create(conv, %{"name" => name, "type" => type}) do

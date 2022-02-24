@@ -1,6 +1,6 @@
 # Servy
 
-**TODO: Add description**
+minimal http server
 
 ## Installation
 

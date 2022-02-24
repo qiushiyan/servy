@@ -2,9 +2,9 @@ defmodule Servy.Parsers do
   alias Servy.Conv
 
   def parse(request) do
-    [top, param_string] = String.split(request, "\n\n")
+    [top, param_string] = String.split(request, "\r\n\r\n")
 
-    [request_line | header_lines] = String.split(top, "\n")
+    [request_line | header_lines] = String.split(top, "\r\n")
 
     headers = parse_headers(header_lines, %{})
     [method, path, _] = String.split(request_line, " ")
@@ -13,18 +13,29 @@ defmodule Servy.Parsers do
     %Conv{method: method, path: path, params: params, headers: headers}
   end
 
-  defp parse_params(param_string, "application/x-www-form-urlencoded") do
+  @doc """
+  Parses the given param string of the form `key1=value1&key2=value2`
+  into a map with corresponding keys and values.
+
+  ## Examples
+      iex> params_string = "name=Baloo&type=Brown"
+      iex> Servy.Parsers.parse_params(params_string, "application/x-www-form-urlencoded")
+      %{"name" => "Baloo", "type" => "Brown"}
+      iex> Servy.Parsers.parse_params(params_string, "multipart/form-data")
+      %{}
+  """
+  def parse_params(param_string, "application/x-www-form-urlencoded") do
     param_string |> String.trim() |> URI.decode_query()
   end
 
-  defp parse_params(_, _content_type), do: %{}
+  def parse_params(_, _content_type), do: %{}
 
-  defp parse_headers([head | tail], headers) do
+  def parse_headers([head | tail], headers) do
     [key, value] = String.split(head, ": ")
 
     headers = Map.put(headers, key, value)
     parse_headers(tail, headers)
   end
 
-  defp parse_headers([], headers), do: headers
+  def parse_headers([], headers), do: headers
 end
