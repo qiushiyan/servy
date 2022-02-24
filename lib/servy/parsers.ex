@@ -2,7 +2,7 @@ defmodule Servy.Parsers do
   alias Servy.Conv
 
   def parse(request) do
-    [top, param_string] = String.split(request, "\r\n\r\n")
+    [top | param_string] = String.split(request, "\r\n\r\n")
 
     [request_line | header_lines] = String.split(top, "\r\n")
 
@@ -24,8 +24,8 @@ defmodule Servy.Parsers do
       iex> Servy.Parsers.parse_params(params_string, "multipart/form-data")
       %{}
   """
-  def parse_params(param_string, "application/x-www-form-urlencoded") do
-    param_string |> String.trim() |> URI.decode_query()
+  def parse_params([h | _], "application/x-www-form-urlencoded") do
+    h |> String.trim() |> URI.decode_query()
   end
 
   def parse_params(_, _content_type), do: %{}
