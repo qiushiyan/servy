@@ -1,6 +1,10 @@
 # Servy
 
-humble http server with OTP
+humble http server with OTP, run with
+
+```
+mix run --no-halt
+```
 
 ## Supervision tree
 
