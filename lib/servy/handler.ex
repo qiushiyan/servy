@@ -5,6 +5,8 @@ defmodule Servy.Handler do
   alias Servy.Controllers.BearController
   alias Servy.Controllers.BearApiController
   alias Servy.Controllers.AboutController
+  alias Servy.Controllers.SensorController
+  alias Servy.Controllers.PledgeController
 
   @moduledoc "handle http requests"
 
@@ -15,9 +17,6 @@ defmodule Servy.Handler do
     |> route
     |> Plugins.track()
     |> format_response
-  end
-
-  def route(%Conv{method: "GET", path: "/"}) do
   end
 
   def route(%Conv{method: "GET", path: "/wildthings"} = conv) do
@@ -33,8 +32,8 @@ defmodule Servy.Handler do
     BearApiController.index(conv)
   end
 
-  def route(%Conv{method: "GET", path: "/bears/" <> id} = conv) do
-    params = Map.put(conv.params, "id", id)
+  def route(%Conv{method: "GET", path: "/bears/" <> bear_id} = conv) do
+    params = Map.put(conv.params, "bear_id", bear_id)
     BearController.show(conv, params)
   end
 
@@ -44,6 +43,18 @@ defmodule Servy.Handler do
 
   def route(%Conv{method: "GET", path: "/about"} = conv) do
     AboutController.index(conv)
+  end
+
+  def route(%Conv{method: "GET", path: "/sensors"} = conv) do
+    SensorController.index(conv)
+  end
+
+  def route(%Conv{method: "GET", path: "/pledges"} = conv) do
+    PledgeController.index(conv)
+  end
+
+  def route(%Conv{method: "POST", path: "/pledges"} = conv) do
+    PledgeController.create(conv, conv.params)
   end
 
   def route(%Conv{path: path, method: method} = conv) do

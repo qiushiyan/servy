@@ -18,7 +18,7 @@ defmodule Servy.Parsers do
   into a map with corresponding keys and values.
 
   ## Examples
-      iex> params_string = "name=Baloo&type=Brown"
+      iex> params_string = ["name=Baloo&type=Brown"]
       iex> Servy.Parsers.parse_params(params_string, "application/x-www-form-urlencoded")
       %{"name" => "Baloo", "type" => "Brown"}
       iex> Servy.Parsers.parse_params(params_string, "multipart/form-data")

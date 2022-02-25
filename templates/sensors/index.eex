@@ -1,0 +1,7 @@
+<h1>images</h1>
+
+<ul>
+  <%= for image <- images do %>
+    <li><%= image %></li>
+  <% end %>
+</ul>
