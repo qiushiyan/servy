@@ -1,5 +1,5 @@
-defmodule Servy.Wildthings do
-  alias Servy.Bear
+defmodule Servy.Web.Wildthings do
+  alias Servy.Web.Bear
 
   def list_bears() do
     [

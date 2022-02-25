@@ -1,5 +1,5 @@
-defmodule Servy.Controllers.PledgeController do
-  alias Servy.Conv
+defmodule Servy.Web.Controllers.PledgeController do
+  alias Servy.Web.Conv
   alias Servy.PledgeServer
 
   def index(conv) do

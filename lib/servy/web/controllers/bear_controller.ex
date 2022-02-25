@@ -1,10 +1,10 @@
-defmodule Servy.Controllers.BearController do
-  alias Servy.Conv
-  alias Servy.Wildthings
-  alias Servy.Bear
+defmodule Servy.Web.Controllers.BearController do
+  alias Servy.Web.Conv
+  alias Servy.Web.Wildthings
+  alias Servy.Web.Bear
   alias Servy.Helpers
 
-  @templates_path Path.expand("../../../templates/bears", __DIR__)
+  @templates_path Path.expand("../../../../templates/bears", __DIR__)
   def index(conv) do
     bears =
       Wildthings.list_bears()

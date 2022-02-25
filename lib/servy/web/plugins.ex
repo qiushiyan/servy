@@ -1,5 +1,5 @@
-defmodule Servy.Plugins do
-  alias Servy.Conv
+defmodule Servy.Web.Plugins do
+  alias Servy.Web.Conv
 
   def rewrite_path(%Conv{path: "/wildlife"} = conv) do
     %Conv{conv | path: "/wildthings"}

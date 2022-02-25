@@ -1,5 +1,5 @@
-defmodule Servy.Parsers do
-  alias Servy.Conv
+defmodule Servy.Web.Parsers do
+  alias Servy.Web.Conv
 
   def parse(request) do
     [top | param_string] = String.split(request, "\r\n\r\n")

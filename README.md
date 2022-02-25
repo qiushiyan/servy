@@ -1,5 +1,7 @@
 # Servy
 
-example OTP web server
+humble http server with OTP
 
 ## Supervision tree
+
+![](https://github.com/qiushiyan/images/blob/e79a3a34b685cc27028b8c77dd6c45d588e2fdde/servy/servy.png?raw=true)

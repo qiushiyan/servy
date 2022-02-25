@@ -1,4 +1,4 @@
-defmodule Servy.Conv do
+defmodule Servy.Web.Conv do
   defstruct method: "",
             path: "",
             status: nil,

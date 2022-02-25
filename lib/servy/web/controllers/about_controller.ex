@@ -1,6 +1,6 @@
-defmodule Servy.Controllers.AboutController do
-  alias Servy.Conv
-  @pages_path Path.expand("../../../pages", __DIR__)
+defmodule Servy.Web.Controllers.AboutController do
+  alias Servy.Web.Conv
+  @pages_path Path.expand("../../../../pages", __DIR__)
   def index(conv) do
     @pages_path
     |> Path.join("about.html")

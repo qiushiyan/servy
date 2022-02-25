@@ -1,12 +1,12 @@
-defmodule Servy.Handler do
-  alias Servy.Plugins
-  alias Servy.Parsers
-  alias Servy.Conv
-  alias Servy.Controllers.BearController
-  alias Servy.Controllers.BearApiController
-  alias Servy.Controllers.AboutController
-  alias Servy.Controllers.SensorController
-  alias Servy.Controllers.PledgeController
+defmodule Servy.Web.Handler do
+  alias Servy.Web.Plugins
+  alias Servy.Web.Parsers
+  alias Servy.Web.Conv
+  alias Servy.Web.Controllers.BearController
+  alias Servy.Web.Controllers.BearApiController
+  alias Servy.Web.Controllers.AboutController
+  alias Servy.Web.Controllers.SensorController
+  alias Servy.Web.Controllers.PledgeController
 
   @moduledoc "handle http requests"
 

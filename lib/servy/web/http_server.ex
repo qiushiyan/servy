@@ -1,4 +1,6 @@
-defmodule Servy.HttpServer do
+defmodule Servy.Web.HttpServer do
+  alias Servy.Web.Handler
+
   @doc """
   Starts the server on the given `port` of localhost.
   """
@@ -51,7 +53,7 @@ defmodule Servy.HttpServer do
   def serve(client_socket) do
     client_socket
     |> read_request
-    |> Servy.Handler.handle()
+    |> Handler.handle()
     |> write_response(client_socket)
   end
 
