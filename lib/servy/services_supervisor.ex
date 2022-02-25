@@ -1,10 +1,10 @@
 defmodule Servy.ServicesSupervisor do
   use Supervisor
 
-  @name __MODULE__
-  def start_link do
+  @name :services_supervisor
+  def start_link(_arg) do
     IO.puts("starting the service")
-    Supervisor.start_link(@name, :ok, name: @name)
+    Supervisor.start_link(__MODULE__, :ok, name: @name)
   end
 
   def init(:ok) do

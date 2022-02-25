@@ -1,5 +1,5 @@
 # Servy
 
-minimal http server
+example OTP web server
 
-## Architecture
+## Supervision tree
