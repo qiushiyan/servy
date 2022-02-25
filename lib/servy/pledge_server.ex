@@ -1,53 +1,52 @@
 defmodule Servy.PledgeServer do
-  alias Servy.GenericServer
+  use GenServer
   @name __MODULE__
-  def start() do
-    pid = GenericServer.start(@name, [], @name)
-    pid
+  def start_link(_arg) do
+    IO.puts("starting pledge server ...")
+    GenServer.start_link(@name, [], name: @name)
+  end
+
+  @impl true
+  def init(args) do
+    {:ok, args}
   end
 
   def recent_pledges() do
-    GenericServer.call(@name, :recent_pledges)
+    GenServer.call(@name, :recent_pledges)
   end
 
   def create_pledge(name, amount) do
-    GenericServer.call(@name, {:create_pledge, name, amount})
+    GenServer.call(@name, {:create_pledge, name, amount})
   end
 
   def total_pledges() do
-    GenericServer.call(@name, :total_pledges)
+    GenServer.call(@name, :total_pledges)
   end
 
   def clear() do
-    GenericServer.cast(@name, :clear)
+    GenServer.cast(@name, :clear)
   end
 
-  def handle_call({:create_pledge, name, amount}, state) do
+  @impl true
+  def handle_call({:create_pledge, name, amount}, _from, state) do
     recent_pledges = Enum.take(state, 2)
     new_state = [{name, amount} | recent_pledges]
-    {{name, amount}, new_state}
+    {:reply, {name, amount}, new_state}
   end
 
-  def handle_call(:recent_pledges, state) do
-    {state, state}
+  @impl true
+  def handle_call(:recent_pledges, _from, state) do
+    {:reply, state, state}
   end
 
-  def handle_call(:total_pledges, state) do
+  @impl true
+  def handle_call(:total_pledges, _from, state) do
     total = state |> Enum.map(&elem(&1, 1)) |> Enum.sum()
-    {total, state}
+    {:reply, total, state}
   end
 
-  def handle_call(_, state) do
-    IO.puts("unsupported message")
-    {nil, state}
-  end
-
+  @impl true
   def handle_cast(:clear, _state) do
-    []
-  end
-
-  def handle_cast(_, state) do
-    IO.puts("unsupported message")
-    state
+    {:noreply, []}
   end
 end
